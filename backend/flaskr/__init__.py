@@ -18,15 +18,18 @@ def create_app(test_config=None):
   # set up CORS, allowing all origins
   CORS(app, resources={'/': {'origins': '*'}})
 
-  
-  '''
-  @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-  '''
+
+  @app.after_request
+  def after_request(response):
+    '''Sets access control'''
+    response.headers.add('Access-Control-Alow-Headers',
+                         'Content-Type, Authorization, true')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,')
+    return response
 
 
-  '''
-  @TODO: Use the after_request decorator to set Access-Control-Allow
-  '''
+
 
   '''
   @TODO: 
