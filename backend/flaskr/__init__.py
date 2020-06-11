@@ -30,12 +30,23 @@ def create_app(test_config=None):
 
 
 
+  @app.route('/categories')
+  def get_catergories():
+    ''' Handles GET requests for getting all categories. '''
 
-  '''
-  @TODO: 
-  Create an endpoint to handle GET requests 
-  for all available categories.
-  '''
+    # TODO: use try except
+
+    categories_query = Category.query.order_by(Category.id).all()
+
+    formatted_categories = [category.format() for category in categories_query]
+
+    return jsonify({
+      'success': True,
+      'categories': formatted_categories
+    })
+
+
+
 
 
   '''
