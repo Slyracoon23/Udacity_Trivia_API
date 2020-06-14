@@ -25,7 +25,7 @@ def create_app(test_config=None):
     response.headers.add('Access-Control-Alow-Headers',
                          'Content-Type, Authorization, true')
     response.headers.add('Access-Control-Allow-Methods',
-                         'GET,PUT,POST,DELETE,')
+                         'GET,PUT,POST,DELETE,OPTIONS')
     return response
 
 
@@ -40,7 +40,7 @@ def create_app(test_config=None):
 
     # TODO: add errorhandling
 
-    formatted_categories = [category.format() for category in categories_query]
+    formatted_categories = {category.id: category.type for category in categories_query}
 
     return jsonify({
       'success': True,
@@ -93,6 +93,7 @@ def create_app(test_config=None):
   TEST: When you click the trash icon next to a question, the question will be removed.
   This removal will persist in the database and when you refresh the page. 
   '''
+
 
   '''
   @TODO: 
