@@ -10,6 +10,19 @@ from models import setup_db, Question, Category
 
 QUESTIONS_PER_PAGE = 10
 
+
+def paginate_questions(request, selection):
+    page = request.args.get('page', 1, type=int)
+    start = (page -1) * QUESTIONS_PER_PAGE
+    end = start + QUESTIONS_PER_PAGE
+
+    questions = [question.format() for question in selection]
+    current_questions = questions[start:end]
+
+    return current_questions
+
+
+
 def create_app(test_config=None):
   # create and configure the app
   app = Flask(__name__)
@@ -34,11 +47,12 @@ def create_app(test_config=None):
   def get_catergories():
     ''' Handles GET requests for getting all categories. '''
 
-    # TODO: use try except
+
 
     categories_query = Category.query.order_by(Category.id).all()
 
-    # TODO: add errorhandling
+    if len(categories_query) == 0:
+        abort(404)
 
     formatted_categories = {category.id: category.type for category in categories_query}
 
@@ -68,13 +82,16 @@ def create_app(test_config=None):
 
     # get all questions
     question_query = Question.query.all()
-    formatted_questions = [question.format() for question in question_query]
-    # TODO: add pagination
+    formatted_questions = paginate_questions(request, question_query)
 
     # get all categoris
     categories_query = Category.query.all()
 
     formatted_categories = {category.id: category.type for category in categories_query}
+
+    if len(current_questions) == 0:
+        abort(404)
+
 
     # return data to view
     return jsonify({
@@ -202,9 +219,11 @@ def create_app(test_config=None):
     try:
       questions = Question.query.filter(Question.category == str(category_id)).all()
 
+      paginated = paginate_questions(request, questions)
+
       return jsonify({
         'success': True,
-        'questions': [question.format() for question in questions],
+        'questions': paginated,
         'total_questions': len(questions),
         'current_category' : category_id
       })
@@ -224,7 +243,7 @@ def create_app(test_config=None):
   # TEST: In the "Play" tab, after a user selects "All" or a category,
   # one question at a time is displayed, the user is allowed to answer
   # and shown whether they were correct or not.
-  
+
   @app.route('/quizzes', methods=['POST'])
   def get_random_quiz_question():
      try:
@@ -245,7 +264,7 @@ def create_app(test_config=None):
 
           new_question = random.choice(available_questions) if available_questions else None
 
-          print(new_question)
+da
           return jsonify({
               'success': True,
               'question': new_question.format() if new_question else None
