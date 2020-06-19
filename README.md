@@ -249,6 +249,7 @@ This endpoint either creates a new question or returns search results.
             "category": "1"
         }'`
 returns 
+
         {
             "created": 173, 
             "success": true
@@ -262,55 +263,55 @@ returns
   - Returns JSON object with paginated matching questions.
 - Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "what"}'`
 
-  {
-  "current_category": null, 
-  "questions": [
-    {
-      "answer": "Tom Cruise", 
-      "category": 5, 
-      "difficulty": 4, 
-      "id": 4, 
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    }, 
-    {
-      "answer": "Edward Scissorhands", 
-      "category": 5, 
-      "difficulty": 3, 
-      "id": 6, 
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    }, 
-    {
-      "answer": "Lake Victoria", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 13, 
-      "question": "What is the largest lake in Africa?"
-    }, 
-    {
-      "answer": "Mona Lisa", 
-      "category": 2, 
-      "difficulty": 3, 
-      "id": 17, 
-      "question": "La Giaconda is better known as what?"
-    }, 
-    {
-      "answer": "The Liver", 
-      "category": 1, 
-      "difficulty": 4, 
-      "id": 20, 
-      "question": "What is the heaviest organ in the human body?"
-    }, 
-    {
-      "answer": "Blood", 
-      "category": 1, 
-      "difficulty": 4, 
-      "id": 22, 
-      "question": "Hematology is a branch of medicine involving the study of what?"
+      {
+      "current_category": null, 
+      "questions": [
+        {
+          "answer": "Tom Cruise", 
+          "category": 5, 
+          "difficulty": 4, 
+          "id": 4, 
+          "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+        }, 
+        {
+          "answer": "Edward Scissorhands", 
+          "category": 5, 
+          "difficulty": 3, 
+          "id": 6, 
+          "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+        }, 
+        {
+          "answer": "Lake Victoria", 
+          "category": 3, 
+          "difficulty": 2, 
+          "id": 13, 
+          "question": "What is the largest lake in Africa?"
+        }, 
+        {
+          "answer": "Mona Lisa", 
+          "category": 2, 
+          "difficulty": 3, 
+          "id": 17, 
+          "question": "La Giaconda is better known as what?"
+        }, 
+        {
+          "answer": "The Liver", 
+          "category": 1, 
+          "difficulty": 4, 
+          "id": 20, 
+          "question": "What is the heaviest organ in the human body?"
+        }, 
+        {
+          "answer": "Blood", 
+          "category": 1, 
+          "difficulty": 4, 
+          "id": 22, 
+          "question": "Hematology is a branch of medicine involving the study of what?"
+        }
+      ], 
+      "success": true, 
+      "total_questions": 6
     }
-  ], 
-  "success": true, 
-  "total_questions": 6
-}
 
 
 
@@ -359,16 +360,16 @@ returns
 - Sample: `curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [12],
                                             "quiz_category": {"type": "History", "id": "4"}}'`
 
-{
-  "question": {
-    "answer": "Scarab", 
-    "category": 4, 
-    "difficulty": 4, 
-    "id": 23, 
-    "question": "Which dung beetle was worshipped by the ancient Egyptians?"
-  }, 
-  "success": true
-}
+        {
+          "question": {
+            "answer": "Scarab", 
+            "category": 4, 
+            "difficulty": 4, 
+            "id": 23, 
+            "question": "Which dung beetle was worshipped by the ancient Egyptians?"
+          }, 
+          "success": true
+        }
 
 
 
