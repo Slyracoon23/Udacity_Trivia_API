@@ -89,7 +89,7 @@ def create_app(test_config=None):
 
     formatted_categories = {category.id: category.type for category in categories_query}
 
-    if len(current_questions) == 0:
+    if len(formatted_questions) == 0:
         abort(404)
 
 
@@ -172,7 +172,7 @@ def create_app(test_config=None):
       question.insert()
 
       return jsonify({
-        'succes': True,
+        'success': True,
         'created': question.id
       })
     except:
@@ -199,7 +199,7 @@ def create_app(test_config=None):
       return jsonify({
         'success': True,
         'questions': [question.format() for question in search_results],
-        'total_question': len(search_results),
+        'total_questions': len(search_results),
         'current_category': None
       })
     else:
@@ -264,7 +264,7 @@ def create_app(test_config=None):
 
           new_question = random.choice(available_questions) if available_questions else None
 
-da
+
           return jsonify({
               'success': True,
               'question': new_question.format() if new_question else None
