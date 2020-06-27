@@ -219,6 +219,7 @@ def create_app(test_config=None):
     try:
       questions = Question.query.filter(Question.category == str(category_id)).all()
 
+
       paginated = paginate_questions(request, questions)
 
       return jsonify({
